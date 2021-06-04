@@ -15,6 +15,30 @@ const cooldowns = new Collection();
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
 
 //this fires when the BOT STARTS DO NOT TOUCH
+
+client.on("message", msg => {
+ if (msg.content.startsWith(PREFIX + "mute")) {
+  var bawan = "AQUAMAN"
+   var muteRole = msg.guild.roles.cache.find(role => role.name.toLowerCase().includes("muted"));
+    var muteUser = msg.mentions.members.first();
+    var muteReason = msg.content.slice(prefix.length + 27);
+    if (!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send("pewist ba role a bo anjamdane amkara");
+    if (!muteUser) return msg.channel.send("kasek mention bka");
+ if (!muteRole) return msg.channel.send("rolek ba nawe muted bwny niya tkaya drwsty bka");
+  if (!msg.guild.member(client.user.id).hasPermission("MANAGE_ROLES")) return msg.channel.send("sarata rolem bare inja bakarm hena");
+ 
+ 
+    var muteEmbed = new Discord.MessageEmbed() 
+    .setTitle("Mute")
+    .addField("Muted user", muteUser)
+    .setFooter(`Muted by ${msg.author.tag}`)
+    .setTimestamp()
+    muteUser.roles.add(muteRole);
+    msg.channel.send(muteEmbed);
+ 
+  }
+})
+
 client.on(`ready`, () => {	
 //////////////
 
